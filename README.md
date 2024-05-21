@@ -7,7 +7,7 @@ Microscale 3-D Capacitence Tomography with a CMOS Sensor Array.
 Download sample 3-D dataset: 
 
 ```
-./download.sh
+./data/datasets/download.sh
 ```
 
 The data will be downloaded to `data/datasets/3-D/dataset`
