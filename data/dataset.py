@@ -49,7 +49,6 @@ class xData():
         # dperm = np.load(self.dperm)
 
         perm_xy[np.isnan(perm_xy)] = 1.0
-        dperm[np.isnan(dperm)] = 0 
 
         return {"perm": [], "perm_xy": perm_xy, "dperm": []}
 
