@@ -2,6 +2,14 @@
 
 Microscale 3-D Capacitence Tomography with a CMOS Sensor Array. 
 
+## Overview
+![Screenshot](docs/model_arch2.png)
+
+### Input and Output formats 
+
+- Input is a 3-D matrix of capacitence measurements of size (m x n x r) = (20, 10, 5)
+- Output is a 3-D volume of size (200, 100, 5) -> (200um, 100um, 50um)
+  
 ## Download 3-D Dataset
 
 Download sample 3-D dataset: 
@@ -12,11 +20,7 @@ Download sample 3-D dataset:
 
 The data will be downloaded to `data/datasets/3-D/dataset`
 
-### Input and Output formats 
 
-- Input is a 3-D matrix of capacitence measurements of size (m x n x r) = (20, 10, 5)
-- Output is a 3-D volume of size (200, 100, 5) -> (200um, 100um, 50um)
-  
 ## Training
 
 ```
