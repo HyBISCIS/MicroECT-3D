@@ -1,9 +1,3 @@
-# Copyright (c) 2023, HyBISCIS Team (Brown University, Boston University)
-# All rights reserved.
-
-# This source code is licensed under the BSD-style license found in the
-# LICENSE file in the root directory of this source tree. 
-
 import sys 
 
 
@@ -21,24 +15,33 @@ __C.DATASET = ConfigurationNode()
 __C.DATASET.PATH = "data/synthetic/data/dataset-small-beads-final"
 __C.DATASET.TRAIN_VAL_TEST_SPLIT = [0.8, 0.1, 0.1]
 __C.DATASET.NORMALIZE = True
+__C.DATASET.MULTI_CLASS = False
 __C.DATASET.NOISE = True
 __C.DATASET.NOISE_STDV =  0.03
 __C.DATASET.STANDARDIZE = False
-__C.DATASET.SHUFFLE = False
+__C.DATASET.SHUFFLE = True
 __C.DATASET.SMOOTH = False
+__C.DATASET.GLOBAL_SCALING = True
+__C.DATASET.DROP_ZEROS = False
 __C.DATASET.BATCH_SIZE = 32
 __C.DATASET.NUM_MEASUREMENTS = 60
+__C.DATASET.INPUT_DEPTH = 20
 __C.DATASET.NUM_ELECTRODES = 15
 __C.DATASET.POS_VALUE = -1.0
 __C.DATASET.NEG_VALUE = 1.0
 __C.DATASET.TRAIN_MIN = None
 __C.DATASET.TRAIN_MAX = None
+__C.DATASET.TEST_MIN = [0.0, 0.0, 0.0, 0.0]
+__C.DATASET.TEST_MAX = [0.0, 0.0, 0.0, 0.0]
+__C.DATASET.CAP_MEAS = ["COL"]
+
 
 # model head configs
 __C.MODEL = ConfigurationNode()
 __C.MODEL.TYPE = 'Vanilla-Decoder'   # Residual-Decoder
 __C.MODEL.HEAD_ACTIVATION = 'Tanh'
 __C.MODEL.HIDDEN_ACTIVATION = 'ReLU'
+__C.MODEL.NUM_CLASSES = 1
 
 # Solver 
 __C.SOLVER = ConfigurationNode()
@@ -46,7 +49,7 @@ __C.SOLVER.LEARNING_RATE = 0.0001
 __C.SOLVER.LR_SCHEDULER = "LambdaLR"
 __C.SOLVER.LR_GAMMA = 0.85
 __C.SOLVER.LOSS = 'IoU'
-__C.SOLVER.EPOCHS = 1
+__C.SOLVER.EPOCHS = 20
 __C.SOLVER.OPTIMIZER = 'adam'
 __C.SOLVER.ENERGY_FACTOR = 0.0001 
 __C.SOLVER.EBM_WEIGHTS = "energy/torch_model.pth"

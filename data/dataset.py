@@ -12,6 +12,7 @@ import glob
 import json 
 import copy 
 import random 
+import pickle
 random.seed(0)
 
 import numpy as np
@@ -35,7 +36,6 @@ except:
     from .mesh_params import MeshParams
     from .plot import draw_grid, draw_line, draw_boundary_measurement 
 
-
 class xData():
     
     def __init__(self, perm, perm_xy, dperm):
@@ -44,16 +44,14 @@ class xData():
         self.dperm = dperm 
 
     def load(self):
-        perm = np.load(self.perm) 
+        # perm = np.load(self.perm) 
         perm_xy = np.load(self.perm_xy)
-        dperm = np.load(self.dperm)
+        # dperm = np.load(self.dperm)
 
         perm_xy[np.isnan(perm_xy)] = 1.0
         dperm[np.isnan(dperm)] = 0 
 
-        perm_xy = perm_xy.reshape(1, perm_xy.shape[0], perm_xy.shape[1])
-
-        return {"perm": perm, "perm_xy": perm_xy, "dperm": dperm}
+        return {"perm": [], "perm_xy": perm_xy, "dperm": []}
 
 
 class yData():
@@ -76,7 +74,7 @@ class yData():
         self.ext_mat.append(ext_mat)
         self.ext_elec_pos.append(ext_elec_pos)
 
-    def load(self):
+    def load(self, is_pickle=False):
         u = []
         u_xy = []
         du = []
@@ -89,21 +87,20 @@ class yData():
             du.append(np.load(self.du[i]))
             
             u_xy[i][np.isnan(u_xy[i])] = 0
-
-        v_b = np.load(self.v_b)
+        
+        if is_pickle:
+            with open(self.v_b, 'rb') as f: 
+                v_b = pickle.load(f) 
+        else: 
+            v_b = np.load(self.v_b)
 
         return {"u": u, "u_xy": u_xy, "du": du, "v_b": v_b, "ext_mat": self.ext_mat, "ext_elec_pos": self.ext_elec_pos} 
+
 
 
 class Dataset(torch.utils.data.IterableDataset):
 
     def __init__(self, path, shuffle=False, normalize=False, standardize=False, smooth=False, pos_value=-1, neg_value=1, train_min=None, train_max=None, device='cuda'):
-        """
-            args: 
-                shuffle: randomize the order of datapoints
-                normalize: scale image pixels to be between [0, 1]
-                standardize: scale image pixels to have zero mena and unit varience
-        """
         if not os.path.exists(path):
             print(f"{path} doesn't exist.")
             sys.exit(1)

@@ -21,11 +21,9 @@ from torchmetrics.metric import Metric
 
 try: 
     from .cc import NormalizedCrossCorrelation
-    from .nmi import MutualInformation
     from .mpa import MeanPixelAccuracy
 except Exception as e:
     from cc import NormalizedCrossCorrelation
-    from nmi import MutualInformation
     from mpa import MeanPixelAccuracy
 
 
@@ -42,7 +40,6 @@ class Metrics():
         self.ssim = StructuralSimilarityIndexMeasure(reduction='elementwise_mean').to(device)
         self.jaccard =  MulticlassJaccardIndex(num_classes=2).to(device) 
         self.cc = NormalizedCrossCorrelation(reduction='mean').to(device)
-        self.nmi = MutualInformation().to(device)
         self.mpa = MeanPixelAccuracy().to(device)
         
         self.metric_fns = {
@@ -52,7 +49,6 @@ class Metrics():
             'PSNR': self.psnr,
             'IoU': self.jaccard,
             'CC': self.cc,
-            'NMI': self.nmi,
             'MPA': self.mpa,
         }
 

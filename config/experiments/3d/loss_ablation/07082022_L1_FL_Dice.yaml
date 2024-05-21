@@ -1,0 +1,25 @@
+NAME: 07082022
+
+DATASET:
+  PATH: "data/logs/07082022_3d_sweep_all/dataset"
+  POS_VALUE: 1.0
+  NEG_VALUE: 0.0
+  NUM_MEASUREMENTS: 200
+  INPUT_DEPTH: 20
+  SHUFFLE: True 
+  NOISE: False 
+  TRAIN_VAL_TEST_SPLIT: [0.8, 0.1, 0.1]
+  BATCH_SIZE: 32
+  CAP_MEAS: ["COL", "ROW"]
+
+MODEL:
+  TYPE: Resdiual-Decoder
+  HEAD_ACTIVATION: Sigmoid
+  
+SOLVER: 
+  LOSS: FL+Dice+L1Smooth
+  LEARNING_RATE: 0.001
+  EPOCHS: 20
+  OPTIMIZER: adam
+  WEIGHTS: [1, 1, 1] 
+  GAMMA: 8 

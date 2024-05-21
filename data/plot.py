@@ -21,6 +21,12 @@ try:
 except ModuleNotFoundError: 
     from .mesh_params import get_2d_grid, MeshParams 
 
+def plot_3d_volume(volume, index, output_dir):
+    # expand the volume into 2-d plots
+    x, z, y = volume.shape
+    for k in range(0, x): 
+        save_path = os.path.join(output_dir,  f"{index}_{k}_cross_section.png")
+        plot_confocal(volume[k, :, :], "Confocal Microscopy", "Row (y)", "Depth (z)", font_size=12, save_path=save_path, aspect_ratio=1, figsize=(6,6))
 
 def plot(sim_data, real_data, row_offsets, save_path): 
     plt.figure(figsize=(14,7))    
