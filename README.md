@@ -1,13 +1,13 @@
 # 🧪 <span>&#181;</span>ECT
 
-Microscale 3-D Capacitence Tomography with a CMOS Sensor Array. 
+Microscale 3-D Capacitance Tomography with a CMOS Sensor Array. 
 
 ## Overview
 ![Screenshot](docs/model_arch2.png)
 
 ### Input and Output formats 
 
-- Input is a 3-D matrix of capacitence measurements of size (m x n x r) = (20, 10, 5)
+- Input is a 3-D matrix of capacitance measurements of size (m x n x r) = (20, 10, 5)
 - Output is a 3-D volume of size (200, 100, 5) -> (200um, 100um, 50um)
   
 ## Download 3-D Dataset
